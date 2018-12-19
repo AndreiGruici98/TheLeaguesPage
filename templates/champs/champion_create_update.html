@@ -1,0 +1,137 @@
+{% extends "champs/base.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="section"></div>
+
+    <div class="col xl8 offset-xl2 s12">
+        <div class="card-panel" style="padding: 25px 80px 25px 80px;">
+
+          <form enctype="multipart/form-data" method="post"> 
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                <p class="red-text">* {{ error }}</p>
+              {% endfor %}
+            {% endif %}
+
+            <div class="row">
+              <div class="input-field col s12">
+                {{ form.name }}
+                <label for="{{form.name.id_for_label}}">{{form.name.label}}</label>
+              </div>
+              {% for error in form.name.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                {{ form.alias }}
+                <label for="{{form.alias.id_for_label}}">{{form.alias.label}}</label>
+              </div>
+              {% for error in form.alias.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                {{ form.quote }}
+                <label for="{{form.quote.id_for_label}}">{{form.quote.label}}</label>
+              </div>
+              {% for error in form.quote.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s12'>
+                {{ form.biography|add_class:"materialize-textarea" }}
+                <label for='{{ form.biography.id_for_label }}'>{{ form.biography.label }}</label>
+              </div>
+              {% for error in form.biography.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                {{ form.role }}
+                <label for="{{form.role.id_for_label}}">Select a role</label>
+              </div>
+              {% for error in form.role.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                {{ form.youtube_video_id }}
+                <label for="{{form.youtube_video_id.id_for_label}}">Youtube Video ID (Optional)</label>
+              </div>
+              {% for error in form.youtube_video_id.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class='row'>
+              <div class='file-field input-field col s12'>
+                <div class="btn blue">
+                  <span>Select Avatar</span>
+                  <input type="file" name="avatar" id="id_avatar">
+                </div>
+                <div class="file-path-wrapper">
+                  <input type="text" class="file-path" placeholder="{% if form.avatar.value %}{{ form.avatar.value }}{% else %}Choose a file{% endif %}">
+                </div>
+              </div>
+              {% for error in form.avatar.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class='row'>
+              <div class='file-field input-field col s12'>
+                <div class="btn blue">
+                  <span>Select Wallpaper</span>
+                  <input type="file" name="wallpaper" id="id_wallpaper">
+                </div>
+                <div class="file-path-wrapper">
+                  <input type="text" class="file-path" placeholder="{% if form.wallpaper.value %}{{ form.wallpaper.value }}{% else %}Choose a file{% endif %}">
+                </div>
+              </div>
+              {% for error in form.wallpaper.errors %}
+                <span class="left red-text" >* {{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class='row'>
+              {% if object %}
+                <a href="{% url 'champion_detail' slug=object.slug %}" class='col s3 btn btn-large waves-effect blue darken-4'>Cancel</a>
+              {% else %}
+                <a href="{% url 'champion_list' %}" class='col s3 btn btn-large waves-effect blue darken-4'>Cancel</a>
+              {% endif %}
+              <button type='submit' name='btn_login' class='col s8 offset-s1 btn btn-large waves-effect blue darken-1'>Submit</button>
+            </div>
+
+          </form>
+
+        </div>
+    </div>
+
+  </div>
+
+{% endblock content %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function(){
+      $('select').formSelect();
+    });
+  </script>
+{% endblock scripts %}

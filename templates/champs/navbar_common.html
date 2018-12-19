@@ -1,0 +1,37 @@
+<div class="navbar-fixed">
+
+  <nav class="blue darken-1" role="navigation">
+    <div class="nav-wrapper container">
+
+      <div class="show-on-medium hide-on-small-only">
+          <a href="#" class="brand-logo center"><div style="font-size: 2.5rem;font-family: 'Boogaloo', cursive; text-transform: uppercase;">LoL Champions</div></a>
+      </div>
+         
+      <div class="show-on-small hide-on-med-and-up">
+          <a href="#" class="brand-logo center"><div style="font-size: 1.5rem;font-family: 'Boogaloo', cursive; text-transform: uppercase;">LoL Champions</div></a>
+      </div>
+
+      <ul class="left hide-on-med-and-down">
+        <li>
+          <a href="{% url 'champion_list' %}">
+            <i class="material-icons left">event</i>
+            Champions
+          </a>
+        </li>
+      </ul>
+
+      <ul class="right hide-on-med-and-down">
+        {% block buttons %} {% endblock buttons %}
+      </ul>
+
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
+
+    </div>
+  </nav>
+  
+</div>
+
+<ul id="nav-mobile" class="sidenav">
+  <li><a href="{% url 'champion_list' %}">Champions</a></li>
+  {% block mobile_buttons %} {% endblock mobile_buttons %}
+</ul>

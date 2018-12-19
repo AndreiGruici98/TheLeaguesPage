@@ -1,0 +1,11 @@
+{% extends "champs/navbar_common.html" %}
+
+{% block buttons %}
+  <li><a href="{% url 'account_login' %}"><i class="material-icons left">person</i>Log In</a></li>
+  <li><a href="{% url 'account_signup' %}"><i class="material-icons left">create</i>Sign Up</a></li>
+{% endblock buttons %}
+
+{% block mobile_buttons %}
+  <li><a href="{% url 'account_login' %}">Log In</a></li>
+  <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+{% endblock mobile_buttons %}

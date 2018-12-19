@@ -1,0 +1,29 @@
+.newcontainer {
+	margin: 0 auto;
+}
+
+@media (max-width: 1490px) {
+	.newcontainer{
+	width: 100%;
+	}
+}
+
+@media (min-width: 1500px) {
+	.newcontainer{
+	  width: 80%;
+	}
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+vis_logo {
+	font-weight: 800;
+}

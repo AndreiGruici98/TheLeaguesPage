@@ -1,0 +1,47 @@
+{% extends "champs/base.html" %}
+
+{% block content %}
+
+  <div class="newcontainer">
+
+    <div class="section row">
+
+      <div class="col xl8 offset-xl2 s12">
+        <div class="card-panel" style="padding: 25px 80px 25px 80px;">
+        
+        <center>
+          <h5>Are you sure you want to delete <span style="font-weight: 500;">{{ object.name }}</span>?</h5>
+          <br />
+
+          <div class='row' style="margin-bottom: 0px;">
+            <div class="col xl4 s12" style="margin-bottom: 15px;">
+              <a href="{% url 'champion_detail' slug=object.slug %}" class='col s12 btn btn-large waves-effect blue darken-4'>Cancel</a>
+            </div>
+            <div class="col xl8 s12">
+              <form method="post">{% csrf_token %}
+                <button type="submit" class='col s12 btn btn-large waves-effect blue darken-1'>Confirm</button>
+              </form>
+              
+            </div>
+          </div>
+
+        </center>
+        
+      
+        </div>
+
+      </div>
+        
+    </div>
+
+  </div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+{% endblock scripts %}

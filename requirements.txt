@@ -1,0 +1,5 @@
+Django==2.0.6
+psycopg2-binary
+django-allauth==0.36.0
+django-widget-tweaks==1.4.2
+Pillow==5.2.0

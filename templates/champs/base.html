@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" />
+
+    <!--Import materialize.css-->
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static "champs/materialize.min.css" %}"  media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="{% static "champs/base.css" %}"  media="screen,projection" />
+
+    <link href="https://fonts.googleapis.com/css?family=Boogaloo" rel="stylesheet">
+
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="{% static "pages/favicon.png" %}" /> -->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <title>
+      {% block title %}
+        LoL Champions
+      {% endblock title %}
+    </title>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    {% block head %}
+    {% endblock head %}
+
+  </head>
+
+  {% block styles %} {% endblock styles %}
+
+  <body {% block body_properties %} class="grey lighten-4" {% endblock body_properties %}>
+
+    <header>
+       {% if user.is_authenticated %}
+        {% include "champs/navbar_user.html" %}
+      {% else %}
+        {% include "champs/navbar_guest.html" %}
+      {% endif %}
+    </header>
+   
+
+    <main>
+
+      {% if messages %}
+      <div id="messages">
+        <div class="row" style="margin: 15px 15px 0px 15px;">
+          <div class="card col xl6 offset-xl3 s12">
+            <div class="col m11 s10">
+              <ul class="messages">
+                  {% for message in messages %}
+                  <li style="margin-left: 10px;" {% if message.tags %} class="{{ message.tags }}" {% endif %} >
+                      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                      {{ message }}
+                  </li>
+                  {% endfor %}
+              </ul>
+            </div>
+            <div class="col m1 s2">
+              <button onclick="closeMessages()" class="btn blue" style="margin-top: 8px;">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {% endif %}
+
+      {% block content %}
+      {% endblock content %}
+
+    </main>
+    
+    {% block footer %}
+      <footer class="page-footer blue darken-3">
+        {% include "champs/footer.html" %}
+      </footer>
+    {% endblock footer %}
+    
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{% static "champs/materialize.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "champs/init.js" %}"></script>
+
+    <script>
+
+      $(document).ready(function(){
+
+        $('.dropdown-trigger-account').dropdown({
+          closeOnClick: false,
+          outDuration: 500,
+          coverTrigger: false,
+          hover: true,
+          constrainWidth: true,
+        });
+
+      });
+
+      $("a[href='#top']").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+      });
+
+      function closeMessages() {
+        $('#messages').slideUp("slow", function(){ $(this).remove();});
+      }
+
+      $(document).ready(function(){
+        $('.sidenav').sidenav();
+      });
+
+    </script>
+
+    {% block scripts %}
+    {% endblock scripts %}
+
+  </body>
+</html>

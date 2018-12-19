@@ -1,0 +1,37 @@
+{% extends "champs/base.html" %}
+
+{% block content %}
+  
+  <div class="container">
+    
+    <div class="row">
+
+      {% for champion in object_list %}
+      <div class="col s12 m6 l4">
+        
+        <a href="{% url 'champion_detail' slug=champion.slug %}" class="black-text">
+          <div class="card horizontal" style="margin-top:20px;">
+            <div class="card-image">
+              {% if champion.avatar %}
+                <img width="120" height="120" src="{{ champion.avatar.url }}">
+              {% else %}
+                <img width="120" height="120" src="https://placehold.it/120">
+              {% endif %}
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p style="font-size: 25px;">{{ champion.name }}</p>
+                <p>{{ champion.alias }}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+
+{% endblock content %}
